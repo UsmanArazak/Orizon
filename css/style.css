@@ -71,6 +71,19 @@ h1,h2,h3,h4,h5{
   color: transparent;
 }
 
+/* Navbar logo sizing */
+.navbar-brand .navbar-logo{
+  height: 32px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 576px){
+  .navbar-brand .navbar-logo{ height: 28px; }
+}
+@media (min-width: 992px){
+  .navbar-brand .navbar-logo{ height: 40px; }
+}
+
 /* Hero-specific override: make hero text plain white for better contrast */
 .hero{ color: #fff; }
 .hero .text-gradient{
@@ -221,7 +234,25 @@ footer{border-top: 1px solid rgba(255,255,255,0.06)}
   .team-card .mt-3{ margin-top: .25rem }
 }
 
+/* Event card styles for OrizonSpace */
+.event-card{ border-radius: .9rem; border: 1px solid rgba(10,37,64,0.04); }
+.event-card .event-badge{ display:inline-block; padding:.35rem .6rem; border-radius: 999px; font-size:.75rem; }
+.event-card .card-title{ font-weight:700; }
+.event-card .event-meta li{ color: #4b5563; font-size:.95rem; }
+.event-card .event-meta i{ width: 18px; height: 18px; }
+
+
 /* AOS reduced-motion support: disable animations when user prefers reduced motion */
 @media (prefers-reduced-motion: reduce){
   [data-aos]{ transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* Orizients additional adjustments: mobile spacing and role contrast */
+@media (max-width: 576px) {
+  .card.team-card { margin-bottom: 0.75rem; }
+  .card.team-card .card-img-top { height: 180px; }
+}
+
+/* Accessibility: ensure sufficient contrast and emphasis on role tag */
+.card.team-card .role { font-weight: 600; color: var(--bs-secondary); }
+
