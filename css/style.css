@@ -1,0 +1,157 @@
+/* Phase 1 - Theming & Utilities for Orizon */
+:root{
+  /* Bootstrap variable overrides */
+  --bs-primary: #0A2540;  /* Orizon Deep Blue */
+  --bs-secondary: #22C55E; /* Orizon Bright Green */
+  --orizon-subtle: #F6F8FA; /* subtle background */
+
+  /* Typography */
+  --bs-body-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Global font fallbacks and heading styles */
+body{
+  font-family: var(--bs-body-font-family);
+  background-color: #fff;
+  color: #0f1724;
+}
+h1,h2,h3,h4,h5{
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+}
+
+/* Buttons: pill-shaped with extra padding */
+.btn{
+  padding: .6rem 1.25rem;
+  border-radius: 999px;
+}
+
+/* Slight elevation and interaction for primary buttons */
+.btn-primary{
+  box-shadow: 0 6px 18px rgba(10,37,64,0.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn-primary:active{ transform: translateY(1px); }
+
+/* Card defaults */
+.card{
+  border: 0;
+  overflow: hidden;
+  border-radius: .75rem;
+}
+.card .card-body{ padding: 1.25rem; }
+.card .card-img-top{ height: 180px; object-fit: cover; }
+
+/* Gradient text utility */
+.text-gradient{
+  background: linear-gradient(90deg, #0A2540 0%, #22C55E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero-specific override: make hero text plain white for better contrast */
+.hero{ color: #fff; }
+.hero .text-gradient{
+  /* Remove gradient effect in hero to ensure readability */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #fff;
+  background-clip: unset;
+  color: #fff;
+}
+
+/* Hover transition utility for cards and interactive items */
+.hover-lift{
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+.hover-lift:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(10, 37, 64, 0.08);
+}
+
+/* Hero overlay (uses background-image on .hero) */
+.hero{
+  min-height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding-top: 6rem; /* to account for fixed navbar */
+  /* Hero image: use provided asset in /assets (WebP first if available). Replace with optimized files as needed */
+  background-image: image-set(url('/assets/hero.webp') type('image/webp') 1x, url('/assets/hero.jpg') type('image/jpeg') 1x);
+  /* Fallback for older browsers or when WebP is not available */
+  background-image: url('/assets/hero.jpg');
+}
+.hero::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10,37,64,0.45), rgba(10,37,64,0.55));
+}
+.hero > .container{position:relative; z-index:2}
+
+/* Utility: subtle background */
+.bg-subtle{background-color: var(--orizon-subtle)}
+
+/* Form focus: green border */
+.form-control:focus{
+  border-color: var(--bs-secondary);
+  box-shadow: 0 0 0 0.15rem rgba(34,197,94,0.15);
+}
+
+/* Footer alignment */
+footer{border-top: 1px solid rgba(255,255,255,0.06)}
+
+/* Responsive tweaks */
+.hero .display-2{ font-size: clamp(1.8rem, 6vw, 3.5rem); }
+
+@media (max-width: 576px){
+  .hero{ min-height: 70vh; padding-top: 5.5rem; }
+  .hero .display-2{ font-size: 2rem; }
+  .hero-ctas{ flex-direction: column !important; }
+  .hero-ctas .btn{ width: 100%; max-width: 320px; }
+
+  .card .card-img-top{ height: 140px; }
+  .card .card-body{ padding: 1rem; }
+
+  .navbar-brand{ font-size: 1rem; }
+  .navbar-toggler{ border-color: rgba(255,255,255,0.18); }
+
+  /* Keep hero stats on a single row on mobile */
+  .hero .hero-stats{ display:flex; flex-wrap:nowrap; gap:1rem; justify-content:space-between; width:100%; }
+  .hero .hero-stats > div{ flex: 1 1 33%; min-width: 0; text-align:center; }
+  .hero .hero-stats .h1{ font-size: 1.6rem; line-height: 1; margin-bottom: .25rem; }
+  .hero .hero-stats .small{ font-size: .68rem; letter-spacing: .03em; }
+}
+
+@media (min-width: 577px) and (max-width: 991px){
+  .card .card-img-top{ height: 160px; }
+}
+
+/* Small accessibility tweak: ensure hero text scales down on very small screens */
+@media (max-width: 360px){
+  .hero .display-2{ font-size: 1.6rem; }
+}
+
+/* Team section styles */
+.team-photo{ width:140px; height:140px; }
+.team-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+.team-overlay{
+  position:absolute; inset:0; background: rgba(10,37,64,0.55);
+  display:flex; align-items:center; justify-content:center; opacity:0; transform: translateY(6px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.team-card:hover .team-overlay, .team-card:focus-within .team-overlay{ opacity:1; transform: translateY(0); }
+.social-icons a{ font-size:1.1rem; color:#fff }
+
+/* Mobile: make icons visible (hover doesn't exist on touch) */
+@media (max-width: 576px){
+  .team-photo{ width:120px; height:120px }
+  .team-overlay{ position:relative; opacity:1; background:transparent; transform:none; margin-top:-40px }
+  .team-card .mt-3{ margin-top: .25rem }
+}
+
+/* AOS reduced-motion support: disable animations when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce){
+  [data-aos]{ transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }
+}

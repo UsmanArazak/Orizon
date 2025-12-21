@@ -1,0 +1,8 @@
+{
+  "name": "orizon-landing",
+  "version": "0.1.0",
+  "description": "Orizon — Tech Innovation Hub (Bootstrap Edition)",
+  "scripts": {
+    "start": "npx live-server --port=5500 --open=./index.html"
+  }
+}
