@@ -161,9 +161,7 @@ h1,h2,h3,h4,h5{
   background-position: center;
   padding-top: 6rem; /* to account for fixed navbar */
   /* Hero image: use provided asset in /assets (WebP first if available). Replace with optimized files as needed */
-  background-image: image-set(url('/assets/hero.webp') type('image/webp') 1x, url('/assets/hero.jpg') type('image/jpeg') 1x);
-  /* Fallback for older browsers or when WebP is not available */
-  background-image: url('/assets/hero.jpg');
+  background-image: url('../assets/hero.jpg');
 }
 .hero::after{
   content: '';
