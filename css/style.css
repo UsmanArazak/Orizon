@@ -1,69 +1,91 @@
 /* Phase 1 - Theming & Utilities for Orizon */
-:root{
+:root {
   /* Bootstrap variable overrides */
-  --bs-primary: #0A2540;  /* Orizon Deep Blue */
-  --bs-secondary: #22C55E; /* Orizon Bright Green */
-  --orizon-subtle: #F6F8FA; /* subtle background */
+  --bs-primary: #0A2540;
+  /* Orizon Deep Blue */
+  --bs-secondary: #22C55E;
+  /* Orizon Bright Green */
+  --orizon-subtle: #F6F8FA;
+  /* subtle background */
 
   /* Typography */
   --bs-body-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 
 /* Global font fallbacks and heading styles */
-body{
+body {
   font-family: var(--bs-body-font-family);
   background-color: #fff;
   color: #0f1724;
 }
-h1,h2,h3,h4,h5{
+
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
 }
 
 /* Buttons: pill-shaped with extra padding */
-.btn{
+.btn {
   padding: .6rem 1.25rem;
   border-radius: 999px;
 }
 
 /* Slight elevation and interaction for primary buttons */
-.btn-primary{
-  box-shadow: 0 6px 18px rgba(10,37,64,0.08);
+.btn-primary {
+  box-shadow: 0 6px 18px rgba(10, 37, 64, 0.08);
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.btn-primary:active{ transform: translateY(1px); }
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
 
 /* Components Playground: use outline-style primary buttons (no filled background)
    Hover/Focus shows a subtle gradient fill to preserve affordance */
-#components .btn-primary{
+#components .btn-primary {
   background: transparent;
   color: var(--bs-primary);
   border: 2px solid var(--bs-primary);
   box-shadow: none;
 }
-#components .btn-primary:hover, #components .btn-primary:focus{
+
+#components .btn-primary:hover,
+#components .btn-primary:focus {
   background: linear-gradient(90deg, var(--bs-primary), var(--bs-secondary));
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 8px 30px rgba(10,37,64,0.08);
+  box-shadow: 0 8px 30px rgba(10, 37, 64, 0.08);
   transform: translateY(-2px);
 }
 
 /* Respect reduced-motion for hover effects */
-@media (prefers-reduced-motion: reduce){
-  #components .btn-primary{ transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #components .btn-primary {
+    transition: none !important;
+  }
 }
 
 /* Card defaults */
-.card{
+.card {
   border: 0;
   overflow: hidden;
   border-radius: .75rem;
 }
-.card .card-body{ padding: 1.25rem; }
-.card .card-img-top{ height: 180px; object-fit: cover; }
+
+.card .card-body {
+  padding: 1.25rem;
+}
+
+.card .card-img-top {
+  height: 180px;
+  object-fit: cover;
+}
 
 /* Gradient text utility */
-.text-gradient{
+.text-gradient {
   background: linear-gradient(90deg, #0A2540 0%, #22C55E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -72,21 +94,30 @@ h1,h2,h3,h4,h5{
 }
 
 /* Navbar logo sizing */
-.navbar-brand .navbar-logo{
+.navbar-brand .navbar-logo {
   height: 32px;
   width: auto;
   display: block;
 }
-@media (max-width: 576px){
-  .navbar-brand .navbar-logo{ height: 28px; }
+
+@media (max-width: 576px) {
+  .navbar-brand .navbar-logo {
+    height: 28px;
+  }
 }
-@media (min-width: 992px){
-  .navbar-brand .navbar-logo{ height: 40px; }
+
+@media (min-width: 992px) {
+  .navbar-brand .navbar-logo {
+    height: 40px;
+  }
 }
 
 /* Hero-specific override: make hero text plain white for better contrast */
-.hero{ color: #fff; }
-.hero .text-gradient{
+.hero {
+  color: #fff;
+}
+
+.hero .text-gradient {
   /* Remove gradient effect in hero to ensure readability */
   background: none;
   -webkit-background-clip: unset;
@@ -96,161 +127,328 @@ h1,h2,h3,h4,h5{
 }
 
 /* Hero CTA: transparent fill, animated gradient sweep on hover, and subtle idle pulse */
-.hero .btn-primary{
+.hero .btn-primary {
   background: transparent;
   color: #fff;
-  border: 2px solid rgba(255,255,255,0.9);
+  border: 2px solid rgba(255, 255, 255, 0.9);
   position: relative;
   overflow: hidden;
   z-index: 1;
   transition: color .25s ease, border-color .25s ease, transform .18s ease, box-shadow .25s ease;
 }
-.hero .btn-primary::before{
+
+.hero .btn-primary::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(10,37,64,0.95), rgba(34,197,94,0.95));
+  background: linear-gradient(90deg, rgba(10, 37, 64, 0.95), rgba(34, 197, 94, 0.95));
   transform: translateX(-100%);
-  transition: transform .45s cubic-bezier(.2,.9,.2,1);
+  transition: transform .45s cubic-bezier(.2, .9, .2, 1);
   z-index: -1;
   opacity: .95;
 }
-.hero .btn-primary:hover::before,
-.hero .btn-primary:focus::before{ transform: translateX(0); }
-.hero .btn-primary:hover,
-.hero .btn-primary:focus{ color: #fff; border-color: transparent; box-shadow: 0 8px 30px rgba(10,37,64,0.18); transform: translateY(-2px); }
 
-@keyframes hero-button-pulse{
-  0%{ box-shadow: 0 6px 20px rgba(34,197,94,0.06); transform: translateY(0); }
-  50%{ box-shadow: 0 12px 34px rgba(34,197,94,0.10); transform: translateY(-2px); }
-  100%{ box-shadow: 0 6px 20px rgba(34,197,94,0.06); transform: translateY(0); }
+.hero .btn-primary:hover::before,
+.hero .btn-primary:focus::before {
+  transform: translateX(0);
+}
+
+.hero .btn-primary:hover,
+.hero .btn-primary:focus {
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 30px rgba(10, 37, 64, 0.18);
+  transform: translateY(-2px);
+}
+
+@keyframes hero-button-pulse {
+  0% {
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.06);
+    transform: translateY(0);
+  }
+
+  50% {
+    box-shadow: 0 12px 34px rgba(34, 197, 94, 0.10);
+    transform: translateY(-2px);
+  }
+
+  100% {
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.06);
+    transform: translateY(0);
+  }
 }
 
 /* Idle pulse (desktop only, and only if user hasn't requested reduced motion) */
-@media (prefers-reduced-motion: no-preference){
-  @media (min-width: 577px){
-    .hero .btn-primary{ animation: hero-button-pulse 4.5s ease-in-out infinite; }
+@media (prefers-reduced-motion: no-preference) {
+  @media (min-width: 577px) {
+    .hero .btn-primary {
+      animation: hero-button-pulse 4.5s ease-in-out infinite;
+    }
   }
 }
 
 /* Mobile tweaks: center button and make full-width */
-@media (max-width: 576px){
-  .hero-ctas .btn{ width: 100%; max-width: 360px; margin: 0 auto; display: block; }
+@media (max-width: 576px) {
+  .hero-ctas .btn {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    display: block;
+  }
 }
 
 /* Respect reduced motion: disable button animations/transitions */
-@media (prefers-reduced-motion: reduce){
-  .hero .btn-primary{ transition: none !important; animation: none !important; }
-  .hero .btn-primary::before{ transition: none !important; transform: none !important; opacity: 0 !important; }
+@media (prefers-reduced-motion: reduce) {
+  .hero .btn-primary {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .hero .btn-primary::before {
+    transition: none !important;
+    transform: none !important;
+    opacity: 0 !important;
+  }
 }
 
 /* Hover transition utility for cards and interactive items */
-.hover-lift{
+.hover-lift {
   transition: transform 250ms ease, box-shadow 250ms ease;
 }
-.hover-lift:hover{
+
+.hover-lift:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 30px rgba(10, 37, 64, 0.08);
 }
 
 /* Hero overlay (uses background-image on .hero) */
-.hero{
+.hero {
   min-height: 100vh;
   position: relative;
   background-size: cover;
   background-position: center;
-  padding-top: 6rem; /* to account for fixed navbar */
+  padding-top: 6rem;
+  /* to account for fixed navbar */
   /* Hero image: use provided asset in /assets (WebP first if available). Replace with optimized files as needed */
   background-image: url('../assets/hero.jpg');
+  background-repeat: no-repeat;
 }
-.hero::after{
+
+.hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10,37,64,0.45), rgba(10,37,64,0.55));
+  background: linear-gradient(180deg, rgba(10, 37, 64, 0.45), rgba(10, 37, 64, 0.55));
 }
-.hero > .container{position:relative; z-index:2}
+
+.hero>.container {
+  position: relative;
+  z-index: 2
+}
 
 /* Utility: subtle background */
-.bg-subtle{background-color: var(--orizon-subtle)}
+.bg-subtle {
+  background-color: var(--orizon-subtle)
+}
 
 /* Form focus: green border */
-.form-control:focus{
+.form-control:focus {
   border-color: var(--bs-secondary);
-  box-shadow: 0 0 0 0.15rem rgba(34,197,94,0.15);
+  box-shadow: 0 0 0 0.15rem rgba(34, 197, 94, 0.15);
 }
 
 /* Footer alignment */
-footer{border-top: 1px solid rgba(255,255,255,0.06)}
-
-/* Responsive tweaks */
-.hero .display-2{ font-size: clamp(1.8rem, 6vw, 3.5rem); }
-
-@media (max-width: 576px){
-  .hero{ min-height: 70vh; padding-top: 5.5rem; }
-  .hero .display-2{ font-size: 2rem; }
-  .hero-ctas{ flex-direction: column !important; }
-  .hero-ctas .btn{ width: 100%; max-width: 320px; }
-
-  .card .card-img-top{ height: 140px; }
-  .card .card-body{ padding: 1rem; }
-
-  .navbar-brand{ font-size: 1rem; }
-  .navbar-toggler{ border-color: rgba(255,255,255,0.18); }
-
-  /* Keep hero stats on a single row on mobile */
-  .hero .hero-stats{ display:flex; flex-wrap:nowrap; gap:1rem; justify-content:space-between; width:100%; }
-  .hero .hero-stats > div{ flex: 1 1 33%; min-width: 0; text-align:center; }
-  .hero .hero-stats .h1{ font-size: 1.6rem; line-height: 1; margin-bottom: .25rem; }
-  .hero .hero-stats .small{ font-size: .68rem; letter-spacing: .03em; }
+footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06)
 }
 
-@media (min-width: 577px) and (max-width: 991px){
-  .card .card-img-top{ height: 160px; }
+/* Responsive tweaks */
+.hero .display-2 {
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
+}
+
+@media (max-width: 576px) {
+  .hero {
+    min-height: 70vh;
+    padding-top: 5.5rem;
+  }
+
+  .hero .display-2 {
+    font-size: 2rem;
+  }
+
+  .hero-ctas {
+    flex-direction: column !important;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .card .card-img-top {
+    height: 140px;
+  }
+
+  .card .card-body {
+    padding: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  /* Keep hero stats on a single row on mobile */
+  .hero .hero-stats {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .hero .hero-stats>div {
+    flex: 1 1 33%;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .hero .hero-stats .h1 {
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: .25rem;
+  }
+
+  .hero .hero-stats .small {
+    font-size: .68rem;
+    letter-spacing: .03em;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+  .card .card-img-top {
+    height: 160px;
+  }
 }
 
 /* Small accessibility tweak: ensure hero text scales down on very small screens */
-@media (max-width: 360px){
-  .hero .display-2{ font-size: 1.6rem; }
+@media (max-width: 360px) {
+  .hero .display-2 {
+    font-size: 1.6rem;
+  }
 }
 
 /* Team section styles */
-.team-photo{ width:140px; height:140px; }
-.team-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
-.team-overlay{
-  position:absolute; inset:0; background: rgba(10,37,64,0.55);
-  display:flex; align-items:center; justify-content:center; opacity:0; transform: translateY(6px);
+.team-photo {
+  width: 140px;
+  height: 140px;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.team-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 37, 64, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(6px);
   transition: opacity .18s ease, transform .18s ease;
 }
-.team-card:hover .team-overlay, .team-card:focus-within .team-overlay{ opacity:1; transform: translateY(0); }
-.social-icons a{ font-size:1.1rem; color:#fff }
+
+.team-card:hover .team-overlay,
+.team-card:focus-within .team-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-icons a {
+  font-size: 1.1rem;
+  color: #fff
+}
 
 /* Mobile: make icons visible (hover doesn't exist on touch) */
-@media (max-width: 576px){
-  .team-photo{ width:120px; height:120px }
-  .team-overlay{ position:relative; opacity:1; background:transparent; transform:none; margin-top:-40px }
-  .team-card .mt-3{ margin-top: .25rem }
+@media (max-width: 576px) {
+  .team-photo {
+    width: 120px;
+    height: 120px
+  }
+
+  .team-overlay {
+    position: relative;
+    opacity: 1;
+    background: transparent;
+    transform: none;
+    margin-top: -40px
+  }
+
+  .team-card .mt-3 {
+    margin-top: .25rem
+  }
 }
 
 /* Event card styles for OrizonSpace */
-.event-card{ border-radius: .9rem; border: 1px solid rgba(10,37,64,0.04); }
-.event-card .event-badge{ display:inline-block; padding:.35rem .6rem; border-radius: 999px; font-size:.75rem; }
-.event-card .card-title{ font-weight:700; }
-.event-card .event-meta li{ color: #4b5563; font-size:.95rem; }
-.event-card .event-meta i{ width: 18px; height: 18px; }
+.event-card {
+  border-radius: .9rem;
+  border: 1px solid rgba(10, 37, 64, 0.04);
+}
+
+.event-card .event-badge {
+  display: inline-block;
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  font-size: .75rem;
+}
+
+.event-card .card-title {
+  font-weight: 700;
+}
+
+.event-card .event-meta li {
+  color: #4b5563;
+  font-size: .95rem;
+}
+
+.event-card .event-meta i {
+  width: 18px;
+  height: 18px;
+}
 
 
 /* AOS reduced-motion support: disable animations when user prefers reduced motion */
-@media (prefers-reduced-motion: reduce){
-  [data-aos]{ transition: none !important; animation: none !important; opacity: 1 !important; transform: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Orizients additional adjustments: mobile spacing and role contrast */
 @media (max-width: 576px) {
-  .card.team-card { margin-bottom: 0.75rem; }
-  .card.team-card .card-img-top { height: 180px; }
+  .card.team-card {
+    margin-bottom: 0.75rem;
+  }
+
+  .card.team-card .card-img-top {
+    height: 180px;
+  }
 }
 
 /* Accessibility: ensure sufficient contrast and emphasis on role tag */
-.card.team-card .role { font-weight: 600; color: var(--bs-secondary); }
-
+.card.team-card .role {
+  font-weight: 600;
+  color: var(--bs-secondary);
+}
