@@ -443,8 +443,15 @@ footer {
   }
 
   .card.team-card .card-img-top {
-    height: 180px;
+    height: 250px;
   }
+}
+
+/* General team card image styling (Desktop) */
+.card.team-card .card-img-top {
+  height: 250px;
+  object-fit: cover;
+  object-position: top center;
 }
 
 /* Accessibility: ensure sufficient contrast and emphasis on role tag */
