@@ -20,6 +20,7 @@ Quick steps (Netlify UI):
 - _Output directory_: `/` or `public` if you use a build step.
 
 ## 3) GitHub Pages
+
 - Option A — GitHub Pages via `gh-pages` branch or `gh-pages` action.
 - Option B — Use GitHub Pages with `Actions` (recommended). Example workflow is provided in `.github/workflows/deploy-pages.yml`.
 
