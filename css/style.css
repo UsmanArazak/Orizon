@@ -1,16 +1,22 @@
 /* Phase 1 - Theming & Utilities for Orizon */
 :root {
   /* Bootstrap variable overrides */
-  --bs-primary: #0A2540;
-  /* Orizon Deep Blue */
-  --bs-secondary: #22C55E;
-  /* Orizon Bright Green */
+  --bs-primary: #041326;
+  /* Brand Dark Blue */
+  --bs-secondary: #0FC9F2;
+  /* Brand Cyan */
+  --orizon-blue: #0777D9;
+  /* Brand Blue */
+  --orizon-green: #9AEBA3;
+  /* Brand Pastel Green */
   --orizon-subtle: #F6F8FA;
   /* subtle background */
 
   /* Typography */
   --bs-body-font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
+
+/* Global font fallbacks and heading styles */
 
 /* Global font fallbacks and heading styles */
 body {
@@ -54,10 +60,10 @@ h5 {
 
 #components .btn-primary:hover,
 #components .btn-primary:focus {
-  background: linear-gradient(90deg, var(--bs-primary), var(--bs-secondary));
+  background: linear-gradient(90deg, var(--orizon-blue), var(--bs-secondary));
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 8px 30px rgba(10, 37, 64, 0.08);
+  box-shadow: 0 8px 30px rgba(7, 119, 217, 0.2);
   transform: translateY(-2px);
 }
 
@@ -86,7 +92,7 @@ h5 {
 
 /* Gradient text utility */
 .text-gradient {
-  background: linear-gradient(90deg, #0A2540 0%, #22C55E 100%);
+  background: linear-gradient(90deg, var(--orizon-blue) 0%, var(--bs-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -118,12 +124,13 @@ h5 {
 }
 
 .hero .text-gradient {
-  /* Remove gradient effect in hero to ensure readability */
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: #fff;
-  background-clip: unset;
-  color: #fff;
+  /* Keep gradient in hero for better pop against dark bg, or remove if preferred. 
+     For now, let's enable it with the new bright colors for a "wow" effect */
+  background: linear-gradient(90deg, var(--orizon-blue) 0%, var(--bs-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Hero CTA: transparent fill, animated gradient sweep on hover, and subtle idle pulse */
@@ -141,7 +148,7 @@ h5 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(10, 37, 64, 0.95), rgba(34, 197, 94, 0.95));
+  background: linear-gradient(90deg, var(--orizon-blue), var(--bs-secondary));
   transform: translateX(-100%);
   transition: transform .45s cubic-bezier(.2, .9, .2, 1);
   z-index: -1;
@@ -409,6 +416,8 @@ footer {
   padding: .35rem .6rem;
   border-radius: 999px;
   font-size: .75rem;
+  background-color: var(--orizon-green) !important;
+  color: #041326 !important;
 }
 
 .event-card .card-title {
@@ -458,4 +467,69 @@ footer {
 .card.team-card .role {
   font-weight: 600;
   color: var(--bs-secondary);
+}
+
+/* Footer Styles */
+.footer-links li a {
+  transition: all 0.2s ease;
+}
+
+/* Footer Styles */
+.footer-links li a {
+  transition: all 0.2s ease;
+  color: var(--bs-primary);
+  /* Dark Blue Links */
+}
+
+.footer-links li a:hover {
+  color: var(--bs-secondary) !important;
+  /* Cyan hover */
+  padding-left: 4px;
+}
+
+.hover-primary:hover {
+  color: var(--bs-secondary) !important;
+}
+
+.social-link {
+  width: 36px;
+  height: 36px;
+  background: rgba(4, 19, 38, 0.05);
+  /* Subtle dark background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--bs-primary);
+  /* Dark Icon */
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: var(--bs-secondary);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Fix input placeholder color for white footer */
+.placeholder-dark::placeholder {
+  color: rgba(4, 19, 38, 0.5);
+  opacity: 1;
+}
+
+.placeholder-dark:focus {
+  background-color: #fff;
+  border-color: var(--bs-secondary);
+  color: var(--bs-primary);
+  box-shadow: none;
+}
+
+/* About Section Styles */
+.about-icon-box {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
