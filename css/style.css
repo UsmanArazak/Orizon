@@ -494,14 +494,14 @@ footer {
 .social-link {
   width: 36px;
   height: 36px;
-  background: rgba(4, 19, 38, 0.05);
-  /* Subtle dark background */
+  background: var(--bs-primary);
+  /* Brand Dark Blue background */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: var(--bs-primary);
-  /* Dark Icon */
+  color: #fff;
+  /* White Icon */
   transition: all 0.3s ease;
   text-decoration: none;
 }
